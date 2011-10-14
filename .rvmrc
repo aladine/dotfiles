@@ -1,0 +1,2 @@
+export rvm_path="/Users/chip/.rvm"
+#rvm_archflags="-arch i386"
