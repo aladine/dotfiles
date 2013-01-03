@@ -1,198 +1,102 @@
-call pathogen#runtime_append_all_bundles()
+" Configuration inspired by http://mislav.uniqpath.com/2011/12/vim-revisited/
+set nocompatible                " choose no compatibility with legacy vi
+set encoding=utf-8
+call pathogen#infect()
 
-" Use Vim settings, rather then Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-set nocompatible
+syntax enable
+filetype plugin indent on       " load file type plugins + indentation
 
-" Allow backgrounding buffers without writing them, and remember marks/undo
-" for backgrounded buffers
-set hidden
+"" Whitespace
+set nowrap                      " don't wrap lines
+set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
+set expandtab                   " use spaces, not tabs (optional)
+"set list                        " Show invisible characters
+set backspace=indent,eol,start  " backspace through everything in insert mode
 
-" Remember more commands and search history
-set history=1000
+"" Searching
+set hlsearch                    " highlight matches
+set incsearch                   " incremental searching
+set ignorecase                  " searches are case insensitive...
+set smartcase                   " ... unless they contain at least one capital letter
 
-" Make tab completion for files/buffers act like bash
-set wildmenu
+set nonumber    " line numbers aren't needed
+set ruler       " show the cursor position all the time
+set cursorline  " highlight the line of the cursor
+set showcmd     " display incomplete commands
+set shell=bash  " avoids munging PATH under zsh
+let g:is_bash=1 " default shell syntax
+set history=200 " remember more Ex commands
+set scrolloff=3 " have some context around the current line always on screen
 
-" Make searches case-sensitive only if they contain upper-case characters
-set ignorecase
-set smartcase
+" Auto-reload buffers when file changed on disk
+set autoread
 
-" Keep more context when scrolling off the end of a buffer
-set scrolloff=3
-
-" Store temporary files in a central spot
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-
-if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
-else
-  set backup		" keep a backup file
-endif
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if &t_Co > 2 
-  syntax on
-  set hlsearch
-  set guifont=Inconsolata-dz:h14
-endif
-
-" Only do this part when compiled with support for autocommands.
-if has("autocmd")
-
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
-  filetype plugin indent on
-
-  " Put these in an autocmd group, so that we can delete them easily.
-  augroup vimrcEx
-  au!
-
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
-
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it when the position is invalid or when inside an event handler
-  " (happens when dropping a file on gvim).
-  autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
-
-  augroup END
-
-else
-
-  set autoindent		" always set autoindenting on
-
-endif " has("autocmd")
-
-
-" GRB: sane editing configuration"
-set expandtab
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set autoindent
-set laststatus=2
-set showmatch
-set incsearch
-
-" GRB: highlighting search"
-set hls
-
-" GRB: set the color scheme
-:set t_Co=256 " 256 colors
-:set background=dark
-:color railscasts
-
-" GRB: use emacs-style tab completion when selecting files, etc
-set wildmode=longest,list
-
-" GRB: Put useful info in status line
-:set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
-:hi User1 term=inverse,bold cterm=inverse,bold ctermfg=red
-
-" GRB: clear the search buffer when hitting return
-:nnoremap <CR> :nohlsearch<cr>
-
-" Remap the tab key to do autocompletion or indentation depending on the
-" context (from http://www.vim.org/tips/tip.php?tip_id=102)
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <s-tab> <c-n>
-
-" When hitting <;>, complete a snippet if there is one; else, insert an actual
-" <;>
-function! InsertSnippetWrapper()
-    let inserted = TriggerSnippet()
-    if inserted == "\<tab>"
-        return ";"
-    else
-        return inserted
-    endif
-endfunction
+set backupdir=~/.vim/_backup    " where to put backup files.
+set directory=~/.vim/_temp      " where to put swap files.
 
 let mapleader=","
-set cursorline
 
-set cmdheight=2
+" clear the search buffer when hitting return
+:nnoremap <CR> :nohlsearch<cr>
 
-" Use <c-h> for snippets
-"let g:NERDSnippets_key = '<c-h>'
+" easier navigation between split windows
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
 
-augroup myfiletypes
-  "clear old autocmds in group
-  autocmd!
-  "for ruby, autoindent with two spaces, always expand tabs
-  autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
-  autocmd FileType python set sw=4 sts=4 et
-augroup END
+" double percentage sign in command mode is expanded
+" to directory of current file - http://vimcasts.org/e/14
+" cnoremap %% <C-R>=expand('%:h').'/'<cr>
 
-set switchbuf=useopen
-
-" Map ,e and ,v to open files in the same directory as the current file
-cnoremap %% <C-R>=expand('%:h').'/'<cr>
-map <leader>e :edit %%
-map <leader>v :view %%
-function! RenameFile()
-    let old_name = expand('%')
-    let new_name = input('New file name: ', expand('%'))
-    if new_name != '' && new_name != old_name
-        exec ':saveas ' . new_name
-        exec ':silent !rm ' . old_name
-        redraw!
-    endif
-endfunction
-map <leader>n :call RenameFile()<cr>
-
-set number
-set numberwidth=5
-
-" Seriously, guys. It's not like :W is bound to anything anyway.
-command! W :w
-
-" Always show tab bar
-set showtabline=2
-
-" Map keys to go to specific files
-map <leader>gr :topleft :split config/routes.rb<cr>
 map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
 map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
 map <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
 map <leader>gh :CommandTFlush<cr>\|:CommandT app/helpers<cr>
 map <leader>gl :CommandTFlush<cr>\|:CommandT lib<cr>
-map <leader>gp :CommandTFlush<cr>\|:CommandT public<cr>
-map <leader>gs :CommandTFlush<cr>\|:CommandT public/stylesheets/sass<cr>
-map <leader>gf :CommandTFlush<cr>\|:CommandT features<cr>
+map <leader>gs :CommandTFlush<cr>\|:CommandT spec<cr>
 map <leader>gg :topleft 100 :split Gemfile<cr>
 map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
 map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
-
+" http://vimcasts.org/e/14
+" cnoremap %% <C-R>=expand('%:h').'/'<cr>
+" map <leader>ew :e %%
 nnoremap <leader><leader> <c-^>
 
-set winwidth=84
+let g:CommandTMaxHeight=10
+let g:CommandTMinHeight=4
 
-set shell=bash
+" Rspec
+map <leader>s :! rspec --colour -fd %<cr>
+map <leader>S :! "rspec --colour -fd % -l " . line(".")<cr>
+map <leader>bs :! bundle exec rspec %<cr>
 
-" Can't be bothered to understand the difference between ESC and <c-c> in
-" insert mode
-imap <c-c> <esc>
+" Terminal Profile: http://noahfrederick.com/blog/2012/hemisu-for-lion-terminal/
+" Font: Monaco 14 pt.
+" Advanced: xterm-16color http://blog.remibergsma.com/2012/03/15/tweak-the-osx-terminal-to-display-colors/
+" Color scheme: http://ethanschoonover.com/solarized
 
-command! InsertTime :normal a<c-r>=strftime('%F %H:%M:%S.0 %z')<cr>
+" 16 or 256
+" let g:solarized_termcolors=   16
+" 0 or 1
+" let g:solarized_termtrans =   0
+" let g:solarized_degrade   =   0
+" let g:solarized_bold      =   1
+" let g:solarized_underline =   1
+" let g:solarized_italic    =   1
+" normal, high or low
+" let g:solarized_contrast  =   "normal"
+" let g:solarized_visibility=   "normal"
+
+set background=dark
+"colorscheme solarized
+colorscheme hemisu
+
+" ctags -R --languages=ruby --exclude=.git
+"
+" https://gist.github.com/992a32cf1ef8651bd2c2 " tmux send -t zsh.0
+" "RSpec::Core::Runner.run(['spec/models/products/book_spec.rb:33'], STDERR,
+" STDOUT)" ENTER
+"
+" RSpec::Core::CommandLine.new().run()new
+"
