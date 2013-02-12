@@ -12,6 +12,7 @@ set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
 set expandtab                   " use spaces, not tabs (optional)
 "set list                        " Show invisible characters
 set backspace=indent,eol,start  " backspace through everything in insert mode
+autocmd FileType ruby,coffee,js,c,php autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 "" Searching
 set hlsearch                    " highlight matches
