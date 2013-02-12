@@ -170,6 +170,7 @@ alias gtag="git tag -a `date -u \"+UTC_%Y%m%d%H%M%S\"`"
 alias tree="tree -C"
 
 alias spec="~/bin/spec.sh"
+alias bi='bundle install --path .bundle/gems --binstubs .bundle/bin'
 
 # Environment
 export GEM_HOME="/Users/chip/.rvm/gems/ruby-1.8.7-p352"
