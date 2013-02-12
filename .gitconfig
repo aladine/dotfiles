@@ -1,5 +1,8 @@
 [alias]
 	co = checkout
+	unstage = reset HEAD
+  l = "!source ~/.githelpers && pretty_git_log"
+
 [user]
 	name = Chip Castle
 	email = chip@chipcastle.com
