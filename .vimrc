@@ -116,10 +116,20 @@ set background=dark
 colorscheme hemisu
 
 " ctags -R --languages=ruby --exclude=.git
-"
+
 " https://gist.github.com/992a32cf1ef8651bd2c2 " tmux send -t zsh.0
 " "RSpec::Core::Runner.run(['spec/models/products/book_spec.rb:33'], STDERR,
 " STDOUT)" ENTER
 "
 " RSpec::Core::CommandLine.new().run()new
-"
+
+" Remapping escape
+inoremap jk <esc>
+inoremap <esc> <nop>
+
+" .vimrc
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+set grepprg=ack
+set tags=./tags
