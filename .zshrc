@@ -196,14 +196,15 @@ export PATH="~/phantomjs-1.7.0-macosx/bin:$PATH"
 export CLICOLOR=1
 export GITHUB_USER='chip'
 export GITHUB_PASSWORD='Hedu0910'
+export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
 
 function encode() { echo -n $@ | perl -pe's/([^-_.~A-Za-z0-9])/sprintf("%%%02X", ord($1))/seg'; }
 function google() { chrome http://www.google.com/search?hl=en#q="`encode $@`" ;}
 
 # vim bindings for the command line
 bindkey -v
+bindkey '^R' history-incremental-search-backward
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
-#[[ $TERM = "screen" ]] && rvm use default
-source .rvmrc
+[[ $TERM = "xterm-256color" ]] && rvm use default
