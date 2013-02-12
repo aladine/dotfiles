@@ -1,2 +1,2 @@
-export rvm_path="/Users/chip/.rvm"
-#rvm_archflags="-arch i386"
+rvm_trust_rvmrcs_flag=1
+rvm_project_rvmrc=0
