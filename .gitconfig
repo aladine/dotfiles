@@ -27,5 +27,13 @@
   added = yellow
   changed = green
   untracked = cyan
+
+[gist]
+	private = no
+  browse = yes
+[github]
+	user = chip
 [core]
 	editor = /usr/bin/vim
+[push]
+	default = simple
