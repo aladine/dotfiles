@@ -25,6 +25,7 @@ WHITE="\[\033[0;37m\]"
 #PS1="\n\033[0;31m\u@\h:\033[0;37m\w\033[0;32m \$(parse_git_branch)\n\033[0;0m> " 
 #PS1="\n\u@\h:\w \$(parse_git_branch)\n> "
 PS1="\n$RED\u@\h:\w $GREEN\$(parse_git_branch)$WHITE\n> "
+PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}"; echo -ne "\007"'
 
 alias '..'='cd ..'
 alias '...'='cd .. && cd ..'
@@ -42,6 +43,16 @@ alias tm="top -o vsize"
 
 # List files
 alias ll="ls -al"
+
+# Ssh
+#alias slice="ssh -p 30000 deploy@slice"
+alias scpp="scp -p 30000 deploy@slice"
+#alias imac="ssh chip@imac"
+alias sb="ssh chip@sandalbeach.dyndns.org"
+
+# Ssh for 2nd Slicehost server which will run the new NYU scheduler, chipcastle.com, acclaimplaza.com.
+alias nyud="ssh -P 30000 deploy@nyudemo"
+#alias slice2="ssh -p 30000 deploy@209.20.64.252"
 
 # Apache
 alias ap="cd /private/etc/apache2"
@@ -64,29 +75,15 @@ alias tu="textmate_urls"
 # Ruby
 alias att="autotest"
 
-# Rails
-alias rin="cd ~/code/rails_invoice"
-
 # MySQL
-alias mydb="mysql -udeploy -p invoice_development"
-alias mysql_start="sudo launchctl load -w /Library/LaunchDaemons/com.mysql.mysqld.plist"
-alias mysql_stop="sudo launchctl unload -w /Library/LaunchDaemons/com.mysql.mysqld.plist"
+alias mydb="mysql -udeploy -pMysqlFreak invoice_development"
+alias mysql_start="launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist"
+alias mysql_stop="launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist"
+alias fix_mysql="sudo install_name_tool -id /usr/local/mysql/lib/libmysqlclient.18.dylib /usr/local/mysql/lib/libmysqlclient.dylib"
 
-# Environment
-export PATH="/bin:/usr/bin:/sbin:/usr/sbin:~/bin:~/ruby/bin:/opt/local/bin:/opt/local/sbin"
-export PATH="/usr/local/git/bin:$PATH"
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH" 
-export PATH="/Library/PostgreSQL/8.4/bin/:$PATH"
-#export PATH="~/.rvm/bin/:$PATH"
-
-export GEM_PATH="$GEM_PATH:~/jruby/lib/ruby/gems/1.8/gems/"
-export LD_LIBRARY_PATH="/usr/local/lib"
-export EDITOR="/usr/bin/vi"
-export SVN_EDITOR=${EDITOR}
-export GIT_EDITOR=${EDITOR}
-export ARCHFLAGS="-arch x86_64"
-export EVENTNOKQUEUE=1
-export EVENT_NOKQUEUE=yes
+# PostgreSQL
+alias postgres_start="launchctl load -w ~/Library/LaunchAgents/postgres.plist"
+alias postgres_stop="launchctl unload -w ~/Library/LaunchAgents/postgres.plist"
 
 # Git
 alias gst="git status"
@@ -109,6 +106,49 @@ alias gitd="git diff"
 alias gitdc="git diff --cached"
 alias gdc="git diff --cached"
 alias oneline="git log --pretty=oneline"
+alias ptags='git push --tags'
+alias tags='git tag -n'
+alias gb="git branch"
+alias stash="git stash"
+
+#
+# Woody's books
+#
+# buyingbot.com (aka staging_development)
+alias stagingwb='ssh wbrent@10.180.82.250'
+alias staging='ssh staging'
+
+# coopersbooks.com (aka live_development)
+alias deployqa='cap qa deploy:migrations'
+alias qawb='ssh wbrent@10.180.76.56'
+alias qa='ssh qa'
+
+# rentbooks.com (aka production) 
+alias coprod="git co production"
+alias pullprod='git pull origin production'
+alias pushprod='git push origin production'
+alias deployprod='cap production_all deploy:migrations'
+alias prodwb='ssh wbrent@10.181.237.243'
+alias prod2wb='ssh wbrent@10.181.229.243'
+alias prod3wb='ssh wbrent@10.181.225.242'
+alias prod4wb='ssh wbrent@10.181.230.22'
+alias prod5wb='ssh wbrent@10.181.230.111'
+alias prod='ssh prod'
+alias prod2='ssh prod2'
+alias prod3='ssh prod3'
+alias prod4='ssh prod4'
+alias prod5='ssh prod5'
+alias prod-db-backup='ssh prod-db-backup'
+
+alias solr1='ssh root@10.181.229.77'
+alias solr2='ssh root@10.181.236.22'
+alias solr3='ssh root@10.181.228.99'
+
+export HUBOT_CAMPFIRE_TOKEN="5c1b73a535c803ede9a097838b5a0e05eb6c0f50"
+export HUBOT_CAMPFIRE_ROOMS="142016"
+export HUBOT_CAMPFIRE_ACCOUNT="ccdc"
+export HUBOT_JENKINS_URL="http://10.180.82.250:8080"
+
 
 # NYU Department of Radiology
 alias nyu="cd ~/Sites/nyu/public"
@@ -120,24 +160,32 @@ source ~/.git-completion.bash
 complete -o default -o nospace -F _git gh
 
 # Postfix Load on Startup
-# sudo launchctl load -w /System/Library/LaunchDaemons/org.postfix.master.plist
+alias postfix_start="sudo launchctl load -w /System/Library/LaunchDaemons/org.postfix.master.plist"
+
+# Postgres SQL start
+alias postgres_start="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
+alias postgres_stop="pg_ctl -D /usr/local/var/postgres stop -s -m fast"
 
 # JDK home
 alias jdkhome="cd /System/Library/Frameworks/JavaVM.framework/Home"
 
-alias ng="cd /opt/nginx/conf/sites-enabled"
-alias ngconf='sudo vi /opt/nginx/conf/nginx.conf'
-alias ngk='sudo /opt/nginx/sbin/nginx -s stop'
-alias nglog='sudo tail -f /opt/nginx/logs/*.log'
-alias ngr='sudo /opt/nginx/sbin/nginx -s reload'
-alias ngs='sudo /opt/nginx/sbin/nginx'
-alias nginx_restart='ngr'
+# Nginx
+alias ng='cd /opt/nginx'
+alias ngconf='ng; sudo vi conf/nginx.conf'
+alias nglog='ng; tail -f logs/*.log'
+alias ngs='launchctl load -F /System/Library/LaunchDaemons/nginx.plist'
+alias ngk='launchctl unload -F /System/Library/LaunchDaemons/nginx.plist'
 alias nginx_start='ngs'
 alias nginx_stop='ngk'
 
+# invoicethat
+alias rin="cd ~/code/rails_invoice"
+alias rinstart='passenger start --socket /tmp/invoicethat.local.socket -d'
+#alias rinstart='rin && bundle exec unicorn -c /Users/chip/code/rails_invoice/shared/config/unicorn.rb -E development -D'
+#alias rinstop="ps -U chip | grep unicorn | grep invoice | cut -d ' ' -f 1 | while read pid; do echo \"kill -9 $pid\" && kill -9 $pid; done"
+
 alias stuck="ps ax | sed '1p;/ [U] /!d'"
 
-#alias wake_up_imac="wakeonlan 00:21:e9:64:fb:c5"
 alias wake_up_imac="wakeonlan 00:1e:52:88:4b:cd" 
 
 alias hist="history"
@@ -146,7 +194,7 @@ alias gr="rake routes | grep "
 alias snowgem='env ARCHFLAGS="-arch x86_64" gem '
 alias mysqlgem='env ARCHFLAGS="-arch x86_64" gem install mysql2 --config-file bundler_config.yml'
 
-alias wobo="cd ~/code/rentwb"
+alias wobo="cd ~/Desktop/code/rentwb"
 alias chrome="open /Applications/Google\ Chrome.app/"
 alias firefox="open /Applications/Firefox.app/"
 alias safari="open /Applications/Safari.app/"
@@ -163,37 +211,32 @@ alias hideallfiles="defaults write com.apple.finder AppleShowAllFiles FALSE; kil
 
 alias purgequeue="for i in `mailq|grep '@' |awk {'print $1'}|grep -v '@'`; do postsuper -d $i ; done"
 
-export NODE_PATH="/usr/local/lib/node"
-#export PATH="/usr/local/share/npm/bin:$PATH"
+# Environment
+export GEM_HOME="/Users/chip/.rvm/gems/ruby-1.8.7-p352"
+export GEM_PATH="$GEM_PATH:~/jruby/lib/ruby/gems/1.8/gems/"
+export LD_LIBRARY_PATH="/usr/local/lib"
+export EDITOR="/usr/bin/vi"
+export SVN_EDITOR=${EDITOR}
+export GIT_EDITOR=${EDITOR}
+export ARCHFLAGS="-arch x86_64"
+export EVENTNOKQUEUE=1
+export EVENT_NOKQUEUE=yes
+export PATH="/bin:/usr/bin:/sbin:/usr/sbin:~/bin:~/ruby/bin:/opt/local/bin:/opt/local/sbin"
+export PATH="/usr/local/git/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH" 
+export PATH="/Library/PostgreSQL/8.4/bin:$PATH"
+export PATH="/usr/X11/bin:$PATH"
+export DYLD_LIBRARY_PATH="/usr/local/mysql/lib:$DYLD_LIBRARY_PATH"
 export PATH="/usr/local/lib/node_modules/npm/bin:$PATH"
 export PATH="$PATH:/Users/chip/.rvm/gems/ruby-1.8.7-p334/bin"
+export PATH="./bin:$PATH"
+export CLICOLOR=1
+export GITHUB_USER='chip'
+export GITHUB_PASSWORD='Hedu0910'
 
-export LS_OPTIONS='--color=auto'
-export CLICOLOR='Yes'
-export LSCOLORS='Bxgxfxfxcxdxdxhbadbxbx'
+alias spn="rake spec:no_rails"
 
-stty erase 
+function encode() { echo -n $@ | perl -pe's/([^-_.~A-Za-z0-9])/sprintf("%%%02X", ord($1))/seg'; }
+function google() { chrome http://www.google.com/search?hl=en#q="`encode $@`" ;}
 
-alias calculator="/Applications/Calculator.app/Contents/MacOS/Calculator"
-alias dropbox="/Applications/Dropbox.app/Contents/MacOS/Dropbox"
-alias evernote="/Applications/Evernote.app/Contents/MacOS/Evernote"
-alias firefox="/Applications/Firefox.app/Contents/MacOS/Firefox"
-alias github="/Applications/GitHub.app/Contents/MacOS/Github"
-alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
-alias preview="/Applications/Preview.app/Contents/MacOS/Preview"
-alias propane="/Applications/Propane.app/Contents/MacOS/Propane"
-alias quicktime="/Applications/QuickTime\ Player.app Contents/MacOS/QuickTime\ Player"
-alias safari="/Applications/Safari.app/Contents/MacOS/Safari"
-alias skype="/Applications/Skype.app/Contents/MacOS/Skype"
-alias twitter="/Applications/Twitter.app/Contents/MacOS/Twitter"
-alias utils="/Applications/Utilities/Contents/MacOS/Utilities"
-alias vlc="/Applications/VLC.app/Contents/MacOS/VLC"
-alias scan="/Applications/VueScan.app/Contents/MacOS/VueScan"
-alias iphoto="/Applications/iPhoto.app/Contents/MacOS/iPhoto"
-alias iterm="/Applications/iTerm.app/Contents/MacOS/iTerm"
-alias itunes="/Applications/iTunes.app/Contents/MacOS/iTunes"
-alias iwork="/Applications/iWork\ '09/Contents/MacOS/iWork\ '09"
-alias namebench="/Applications/namebench.app/Contents/MacOS/namebench"
-alias pomodoro="/Applications/pomodoro.app/Contents/MacOS/pomodoro"
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
