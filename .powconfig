@@ -1,1 +1,2 @@
-export POW_DOMAINS=dev,local
+#export POW_EXT_DOMAINS=local,dev
+export POW_DOMAINS=local,dev
