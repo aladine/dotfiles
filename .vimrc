@@ -68,31 +68,27 @@ let g:CommandTMaxHeight=10
 let g:CommandTMinHeight=4
 
 " Rspec
-"map <leader>s :! rspec --colour -fd %<cr>
-"map <leader>S :! "rspec --colour -fd % -l " . line(".")<cr>
-map <leader>bs :! bundle exec rspec %<cr>
-
+" function! RSpecFile()
+"   execute("!clear && rspec " . expand("%p"))
+" endfunction
+" map <leader>S :call RSpecFile() <CR>
+" command! RSpecFile call RSpecFile()
+" 
+" function! RSpecCurrent()
+"   execute("!clear && rspec " . expand("%p") . ":" . line("."))
+" endfunction
+" map <leader>s :call RSpecCurrent() <CR>
+" command! RSpecCurrent call RSpecCurrent()
+" Rspec
+function! RSpecLine()
+  execute "!echo rspec " . expand("%") . " -l " . line('.') " > test-commands"
+endfunction
 function! RSpecFile()
-  execute("!clear && rspec " . expand("%p"))
+  execute "!echo rspec " . expand("%") . " > test-commands"
 endfunction
-map <leader>S :call RSpecFile() <CR>
-command! RSpecFile call RSpecFile()
+map <leader>s :w\|:call RSpecLine() <CR>\|:redraw!<CR>
+map <leader>S :w\|:call RSpecFile() <CR>\|:redraw!<CR>
 
-function! RSpecCurrent()
-  execute("!clear && rspec " . expand("%p") . ":" . line("."))
-endfunction
-map <leader>s :call RSpecCurrent() <CR>
-command! RSpecCurrent call RSpecCurrent()
-
-let g:ScreenImpl = 'Tmux'
-let g:ScreenShellTmuxInitArgs = '-2'
-let g:ScreenShellInitialFocus = 'shell'
-let g:ScreenShellQuitOnVimExit = 0
-map <F5> :ScreenShellVertical<CR>
-command -nargs=? -complete=shellcmd W  :w | :call ScreenShellSend("load '".@%."';")
-map <Leader>r :w<CR> :call ScreenShellSend("rspec ".@% . ':' . line('.'))<CR>
-"map <Leader>e :w<CR> :call ScreenShellSend("cucumber --format=pretty ".@% . ':' . line('.'))<CR>
-map <Leader>b :w<CR> :call ScreenShellSend("break ".@% . ':' . line('.'))<CR>
 
 " Terminal Profile: http://noahfrederick.com/blog/2012/hemisu-for-lion-terminal/
 " Font: Monaco 14 pt.
