@@ -129,3 +129,6 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 
 set grepprg=ack
 set tags=./tags
+
+nnoremap <leader>w <esc>:w<CR>
+nnoremap <leader>q <esc>:wq<CR>
