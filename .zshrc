@@ -29,12 +29,12 @@ ZSH_THEME="chip"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git osx)
+plugins=()
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/Users/chip/.rvm/gems/ruby-1.9.3-p194/bin:/Users/chip/.rvm/gems/ruby-1.9.3-p194@global/bin:/Users/chip/.rvm/rubies/ruby-1.9.3-p194/bin:/Users/chip/.rvm/bin:./bin:/usr/local/lib/node_modules/npm/bin:/usr/X11/bin:/Library/PostgreSQL/8.4/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/git/bin:/bin:/usr/bin:/sbin:/usr/sbin:~/bin:~/ruby/bin:/opt/local/bin:/opt/local/sbin
+export PATH=./bin:/usr/local/lib/node_modules/npm/bin:/usr/X11/bin:/Library/PostgreSQL/8.4/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/git/bin:/bin:/usr/bin:/sbin:/usr/sbin:~/bin:~/ruby/bin:/opt/local/bin:/opt/local/sbin
 
 # Mail
 alias mi="tail -f /var/log/mail.log"
