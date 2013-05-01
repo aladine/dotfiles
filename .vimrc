@@ -51,42 +51,15 @@ nnoremap <c-l> <c-w>l
 " double percentage sign in command mode is expanded
 " to directory of current file - http://vimcasts.org/e/14
 " cnoremap %% <C-R>=expand('%:h').'/'<cr>
-
-map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
-map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
-map <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
-map <leader>gh :CommandTFlush<cr>\|:CommandT app/helpers<cr>
-map <leader>gl :CommandTFlush<cr>\|:CommandT lib<cr>
-map <leader>gs :CommandTFlush<cr>\|:CommandT spec<cr>
 map <leader>gg :topleft 100 :split Gemfile<cr>
-map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
-map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
-" http://vimcasts.org/e/14
-" cnoremap %% <C-R>=expand('%:h').'/'<cr>
-" map <leader>ew :e %%
+
 nnoremap <leader><leader> <c-^>
 
-let g:CommandTMaxHeight=10
-let g:CommandTMinHeight=4
-
-" Rspec
-" function! RSpecFile()
-"   execute("!clear && rspec " . expand("%p"))
-" endfunction
-" map <leader>S :call RSpecFile() <CR>
-" command! RSpecFile call RSpecFile()
-" 
-" function! RSpecCurrent()
-"   execute("!clear && rspec " . expand("%p") . ":" . line("."))
-" endfunction
-" map <leader>s :call RSpecCurrent() <CR>
-" command! RSpecCurrent call RSpecCurrent()
-" Rspec
 function! RSpecLine()
-  execute "!echo rspec " . expand("%") . " -l " . line('.') " > test-commands"
+  execute "!echo bundle exec rspec " . expand("%") . " -l " . line('.') " > test-commands"
 endfunction
 function! RSpecFile()
-  execute "!echo rspec " . expand("%") . " > test-commands"
+  execute "!echo bundle exec rspec " . expand("%") . " > test-commands"
 endfunction
 map <leader>s :w\|:call RSpecLine() <CR>\|:redraw!<CR>
 map <leader>S :w\|:call RSpecFile() <CR>\|:redraw!<CR>
