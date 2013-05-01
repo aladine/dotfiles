@@ -6,6 +6,8 @@ call pathogen#infect()
 syntax enable
 filetype plugin indent on       " load file type plugins + indentation
 
+set shell=/usr/local/bin/zsh
+
 "" Whitespace
 set nowrap                      " don't wrap lines
 set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
