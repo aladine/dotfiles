@@ -48,6 +48,7 @@ alias tm="top -o vsize"
 
 # List files
 alias ll="ls -al"
+alias l="ls -al"
 
 # Ssh for 2nd Slicehost server which will run the new NYU scheduler, chipcastle.com, acclaimplaza.com.
 alias nyud="ssh -P 30000 deploy@nyudemo"
@@ -66,23 +67,27 @@ alias postgres_start="launchctl load -w ~/Library/LaunchAgents/postgres.plist"
 alias postgres_stop="launchctl unload -w ~/Library/LaunchAgents/postgres.plist"
 
 # Git
-alias gst="git status"
-alias pull="git pull origin" 
+alias g="git status"
+alias gst="echo 'Use g instead' && git status"
+alias pull="git pull origin"
 alias pullm='git pull --rebase origin master'
-alias pullo="git pull" 
-alias push="git push origin" 
-alias pusho="git push" 
-alias commita="git commit -a -m " 
-alias commit="git commit -m" 
+alias pullr="git pull"
+alias push="git push origin"
+alias pushr="git push"
+alias c="git commit -m "
+alias ca="git commit -a -m "
+alias commita="echo 'Use ca instead' && git commit -a -m "
+alias commit="echo 'Use c instead' && git commit -m"
 alias undo="git reset --soft HEAD^"
-alias status="git status" 
-alias co="git checkout" 
-alias coma="git checkout master" 
-alias branch="git branch" 
-alias merge="git merge --no-ff" 
+alias status="git status"
+alias co="git checkout"
+alias coma="git checkout master"
+alias branch="git branch"
+alias merge="git merge --no-ff"
 alias remote="git remote"
 alias gitprune="git remote prune origin" # remote branches were already deleted, so need to prune locals
-alias gitd="git diff"
+alias gd="git diff"
+alias gitd="echo 'Use gd instead' && git diff"
 alias gitdc="git diff --cached"
 alias gdc="git diff --cached"
 alias oneline="git log --pretty=oneline"
@@ -90,8 +95,9 @@ alias ptags='git push --tags'
 alias tags='git tag -n'
 alias gb="git branch"
 alias stash="git stash"
+alias a="ack"
+alias v="vim"
 
-#
 # Woody's books
 #
 # buyingbot.com (aka staging_development)
@@ -104,9 +110,9 @@ alias qawb='ssh wbrent@10.180.76.56'
 alias qa='ssh qa'
 
 # rentbooks.com (aka production) 
-alias coprod="git co production"
-alias pullprod='git pull origin production'
-alias pushprod='git push origin production'
+alias coprod="co production"
+alias pullprod='pull production'
+alias pushprod='push production'
 alias deployprod='cap production_all deploy:migrations'
 alias prodwb='ssh wbrent@10.181.237.243'
 alias prod2wb='ssh wbrent@10.181.229.243'
@@ -161,7 +167,7 @@ alias chrome="open /Applications/Google\ Chrome.app/"
 alias firefox="open /Applications/Firefox.app/"
 alias safari="open /Applications/Safari.app/"
 
-alias purgequeue="for i in `mailq|grep '@' |awk {'print $1'}|grep -v '@'`; do postsuper -d $i ; done"
+#alias purgequeue="for i in `mailq|grep '@' |awk {'print $1'}|grep -v '@'`; do postsuper -d $i ; done"
 alias spn="rake spec:no_rails"
 
 alias ctags="`brew --prefix`/bin/ctags"
@@ -171,9 +177,10 @@ alias tree="tree -C"
 
 alias spec="~/bin/spec.sh"
 alias bi='bundle install --path .bundle/gems --binstubs .bundle/bin'
+alias be='bundle exec'
+#git_prompt_info | perl -ne 's/\[chip\/([^_]+)_(.*)$/$1/; chomp $_; print "commit [$_]\n";'
 
 # Environment
-export GEM_HOME="/Users/chip/.rvm/gems/ruby-1.8.7-p352"
 export GEM_PATH="$GEM_PATH:~/jruby/lib/ruby/gems/1.8/gems/"
 export LD_LIBRARY_PATH="/usr/local/lib"
 export EDITOR="/usr/bin/vi"
@@ -190,7 +197,6 @@ export PATH="/usr/X11/bin:$PATH"
 #export DYLD_LIBRARY_PATH="/usr/local/mysql/lib:$DYLD_LIBRARY_PATH"
 #unset DYLD_LIBRARY_PATH
 export PATH="/usr/local/lib/node_modules/npm/bin:$PATH"
-export PATH="$PATH:/Users/chip/.rvm/gems/ruby-1.8.7-p334/bin"
 export PATH="./bin:$PATH"
 export PATH="~/phantomjs-1.7.0-macosx/bin:$PATH"
 export CLICOLOR=1
@@ -200,11 +206,16 @@ export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
 
 function encode() { echo -n $@ | perl -pe's/([^-_.~A-Za-z0-9])/sprintf("%%%02X", ord($1))/seg'; }
 function google() { chrome http://www.google.com/search?hl=en#q="`encode $@`" ;}
+function commands() {
+  awk '{a[$2]++}END{for(i in a){print a[i] " " i}}'
+}
+#history | commands | sort -rn | head
 
 # vim bindings for the command line
 bindkey -v
 bindkey '^R' history-incremental-search-backward
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 
-[[ $TERM = "xterm-256color" ]] && rvm use default
+# cane --abc-glob '{lib/spec/app}/*/.rb' --abc-max 9
