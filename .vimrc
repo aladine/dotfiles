@@ -69,41 +69,46 @@ map <leader>S :w\|:call RSpecFile() <CR>\|:redraw!<CR>
 " Font: Monaco 14 pt.
 " Advanced: xterm-16color http://blog.remibergsma.com/2012/03/15/tweak-the-osx-terminal-to-display-colors/
 " Color scheme: http://ethanschoonover.com/solarized
-
-" 16 or 256
-" let g:solarized_termcolors=   16
-" 0 or 1
-" let g:solarized_termtrans =   0
-" let g:solarized_degrade   =   0
-" let g:solarized_bold      =   1
-" let g:solarized_underline =   1
-" let g:solarized_italic    =   1
-" normal, high or low
-" let g:solarized_contrast  =   "normal"
-" let g:solarized_visibility=   "normal"
-
 set background=dark
-"colorscheme solarized
 colorscheme hemisu
-
-" ctags -R --languages=ruby --exclude=.git
-
-" https://gist.github.com/992a32cf1ef8651bd2c2 " tmux send -t zsh.0
-" "RSpec::Core::Runner.run(['spec/models/products/book_spec.rb:33'], STDERR,
-" STDOUT)" ENTER
-"
-" RSpec::Core::CommandLine.new().run()new
 
 " Remapping escape
 inoremap jk <esc>
 inoremap <esc> <nop>
 
 " .vimrc
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>ev :e $MYVIMRC<cr>
+nnoremap <leader>sv :w\|:source $MYVIMRC<cr>
+nnoremap <leader>zsh :e ~/.zshrc<cr>
 
 set grepprg=ack
-set tags=./tags
 
-nnoremap <leader>w <esc>:w<CR>
-nnoremap <leader>q <esc>:wq<CR>
+"set tags=./tags
+nnoremap <leader>gtag :!ctags -R --languages=ruby --exclude=.git -f ./.git/tags --tag-relative=yes<cr>
+let g:tagbar_ctags_bin='/usr/local/bin/ctags'  " Proper Ctags locations
+let g:tagbar_width=26                          " Default is 40, seems too wide
+noremap <silent> <Leader>yy :TagbarToggle       " Display panel with y (or ,y)
+
+" Ctrl-P mapping is overwritten
+let g:ctrlp_map = '<leader>f'
+let g:ctrlp_custom_ignore = 'tmp\|log\|public\|vendor/assets\|vendor/bundle\|vendor/plugins\|spec/cassett\|\.git\|cassett\|/.git\|/app/assets/image\|/coverage'
+nnoremap <leader>b<cr> :CtrlPBuffer
+
+"map <leader>j :call JumpBetweenSpecAndCode()<cr>
+
+"function! JumpBetweenSpecAndCode()
+"  let filename = expand("%:t")
+"  if filename =~ '_spec\.'
+"  let filename = substitute(filename, '_spec', '', '')
+"  let foundfile = findfile(filename, ";,**")
+"  exec "edit " . foundfile
+"  else
+"  let filename = substitute(filename, '\.', '_spec\.', '')
+"  let foundfile = findfile(filename, ";,**")
+"  exec "edit " . foundfile
+"  endif
+"endfunction
+"
+" From Alex for opening spec file for current file
+" map <leader>A :on<CR>\|:vsplit<CR>\|<c-w>l\|:A<CR>
+
