@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/Users/chip/Desktop/code/rentwb/config/faq'
+let g:netrw_dirhist_2='/Users/chip/Desktop/code/rentwb/config/initializers'
+let g:netrw_dirhist_3='/Users/chip/Desktop/code/rentwb/config/locales'
+let g:netrw_dirhist_4='/Users/chip/Desktop/code/rentwb/config/settings'
+let g:netrw_dirhist_5='/Users/chip/Desktop/code/rentwb/lib/payment/gateway'
+let g:netrw_dirhist_6='/Users/chip/Documents/code/chipcastle.com/config'
+let g:netrw_dirhist_7='/Users/chip/Documents/code/hamptoncovepreschool.com/source/layouts'
