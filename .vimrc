@@ -111,4 +111,10 @@ nnoremap <leader>b<cr> :CtrlPBuffer
 "
 " From Alex for opening spec file for current file
 " map <leader>A :on<CR>\|:vsplit<CR>\|<c-w>l\|:A<CR>
+if exists(":Tabularize")
+  nmap <Leader>a= :Tabularize /=<CR>
+  vmap <Leader>a= :Tabularize /=<CR>
+  nmap <Leader>a: :Tabularize /:\zs<CR>
+  vmap <Leader>a: :Tabularize /:\zs<CR>
+endif
 
