@@ -118,3 +118,4 @@ if exists(":Tabularize")
   vmap <Leader>a: :Tabularize /:\zs<CR>
 endif
 
+set runtimepath+=~/.vim/ultisnips_rep
