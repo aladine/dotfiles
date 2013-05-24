@@ -64,6 +64,9 @@ endfunction
 map <leader>s :w\|:call RSpecLine() <CR>\|:redraw!<CR>
 map <leader>S :w\|:call RSpecFile() <CR>\|:redraw!<CR>
 
+map <leader>w :w<CR>
+map <leader>q :q<CR>
+map <leader>x :wq<CR>
 
 " Terminal Profile: http://noahfrederick.com/blog/2012/hemisu-for-lion-terminal/
 " Font: Monaco 14 pt.
