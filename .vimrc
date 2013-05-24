@@ -95,7 +95,8 @@ noremap <silent> <Leader>yy :TagbarToggle       " Display panel with y (or ,y)
 " Ctrl-P mapping is overwritten
 let g:ctrlp_map = '<leader>f'
 let g:ctrlp_custom_ignore = 'tmp\|log\|public\|vendor/assets\|vendor/bundle\|vendor/plugins\|spec/cassett\|\.git\|cassett\|/.git\|/app/assets/image\|/coverage'
-nnoremap <leader>b<cr> :CtrlPBuffer
+let g:ctrlp_working_path_mode = 1
+nnoremap <leader>b :CtrlPBuffer<CR>
 
 "map <leader>j :call JumpBetweenSpecAndCode()<cr>
 
