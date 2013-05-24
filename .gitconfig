@@ -2,7 +2,6 @@
 	co = checkout
 	unstage = reset HEAD
   l = "!source ~/.githelpers && pretty_git_log"
-  #l = "log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(green) %an, %C(reset) %ar%Creset'"
 
 [user]
 	name = Chip Castle
@@ -32,10 +31,9 @@
 [gist]
 	private = no
   browse = yes
+
 [github]
 	user = chip
+
 [core]
 	editor = /usr/bin/vim
-[push]
-	default = simple
-
