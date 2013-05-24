@@ -122,4 +122,18 @@ if exists(":Tabularize")
   vmap <Leader>a: :Tabularize /:\zs<CR>
 endif
 
-set runtimepath+=~/.vim/ultisnips_rep
+" http://blog.siyelo.com/vim-tips-part-ii
+" :vimgrep /CurrencyNumberHelper/ app/models/*.rb
+" :Qargs
+" :argdo %s/CurrencyNumberHelper/CurrencyHelper/g
+" :argdo update
+command! -nargs=0 -bar Qargs execute 'args' QuickfixFilenames()
+" populate the argument list with each of the files named in the quickfix list
+function! QuickfixFilenames()
+  let buffer_numbers = {}
+  for quickfix_item in getqflist()
+    let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
+  endfor
+  return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
+endfunction
+
