@@ -36,4 +36,4 @@
 	user = chip
 
 [core]
-	editor = /usr/bin/vim
+	editor = /usr/bin/vim -f
