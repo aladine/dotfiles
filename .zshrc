@@ -95,7 +95,7 @@ alias ptags='git push --tags'
 alias tags='git tag -n'
 alias gb="git branch"
 alias stash="git stash"
-alias a="ack"
+alias a="ag"
 alias v="vim"
 
 # Woody's books
@@ -153,8 +153,10 @@ alias postgres_stop="pg_ctl -D /usr/local/var/postgres stop -s -m fast"
 # JDK home
 alias jdkhome="cd /System/Library/Frameworks/JavaVM.framework/Home"
 
+alias code="cd ~/code"
+
 # invoicethat
-alias rin="cd ~/Desktop/code/rails_invoice"
+alias rin="cd ~/code/rails_invoice"
 alias rinstart='passenger start --socket /tmp/invoicethat.local.socket -d'
 
 alias stuck="ps ax | sed '1p;/ [U] /!d'"
@@ -162,7 +164,7 @@ alias stuck="ps ax | sed '1p;/ [U] /!d'"
 alias snowgem='env ARCHFLAGS="-arch x86_64" gem '
 alias mysqlgem='env ARCHFLAGS="-arch x86_64" gem install mysql2 --config-file bundler_config.yml'
 
-alias wobo="cd ~/Desktop/code/rentwb"
+alias wobo="cd ~/code/woboinc/rentwb"
 alias chrome="open /Applications/Google\ Chrome.app/"
 alias firefox="open /Applications/Firefox.app/"
 alias safari="open /Applications/Safari.app/"
@@ -205,11 +207,12 @@ export GITHUB_PASSWORD='Hedu0910'
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
 
 function encode() { echo -n $@ | perl -pe's/([^-_.~A-Za-z0-9])/sprintf("%%%02X", ord($1))/seg'; }
-function google() { chrome http://www.google.com/search?hl=en#q="`encode $@`" ;}
+#function google() { chrome http://www.google.com/search?hl=en#q="`encode $@`" ;}
 function commands() {
   awk '{a[$2]++}END{for(i in a){print a[i] " " i}}'
 }
 #history | commands | sort -rn | head
+alias topten="history | commands | sort -rn | head"
 
 # vim bindings for the command line
 bindkey -v
