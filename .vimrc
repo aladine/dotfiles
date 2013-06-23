@@ -7,6 +7,7 @@ syntax enable
 filetype plugin indent on       " load file type plugins + indentation
 
 set shell=/usr/local/bin/zsh
+setlocal spell spelllang=en_us 
 
 "" Whitespace
 set nowrap                      " don't wrap lines
@@ -43,11 +44,11 @@ let mapleader=","
 :nnoremap <CR> :nohlsearch<cr>
 
 " easier navigation between split windows
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
-
+" nnoremap <c-j> <c-w>j
+" nnoremap <c-k> <c-w>k
+" nnoremap <c-h> <c-w>h
+" nnoremap <c-l> <c-w>l
+" 
 " double percentage sign in command mode is expanded
 " to directory of current file - http://vimcasts.org/e/14
 " cnoremap %% <C-R>=expand('%:h').'/'<cr>
@@ -72,7 +73,8 @@ map <leader>x :wq<CR>
 " Font: Monaco 14 pt.
 " Advanced: xterm-16color http://blog.remibergsma.com/2012/03/15/tweak-the-osx-terminal-to-display-colors/
 " Color scheme: http://ethanschoonover.com/solarized
-set background=dark
+"set background=dark
+set background=light
 colorscheme hemisu
 
 " Remapping escape
@@ -83,6 +85,7 @@ inoremap <esc> <nop>
 nnoremap <leader>ev :e $MYVIMRC<cr>
 nnoremap <leader>sv :w\|:source $MYVIMRC<cr>
 nnoremap <leader>zsh :e ~/.zshrc<cr>
+nnoremap <leader>th :e ~/.oh-my-zsh/themes/chip.zsh-theme<cr>
 
 set grepprg=ack
 
@@ -95,7 +98,7 @@ noremap <silent> <Leader>yy :TagbarToggle       " Display panel with y (or ,y)
 " Ctrl-P mapping is overwritten
 let g:ctrlp_map = '<leader>f'
 let g:ctrlp_custom_ignore = 'tmp\|log\|public\|vendor/assets\|vendor/bundle\|vendor/plugins\|spec/cassett\|\.git\|cassett\|/.git\|/app/assets/image\|/coverage'
-let g:ctrlp_working_path_mode = 1
+let g:ctrlp_working_path_mode = 0
 nnoremap <leader>b :CtrlPBuffer<CR>
 
 "map <leader>j :call JumpBetweenSpecAndCode()<cr>
