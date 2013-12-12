@@ -58,6 +58,63 @@ map <leader>gg :topleft 100 :split Gemfile<cr>
 
 nnoremap <leader><leader> <c-^>
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Test-running stuff
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! RunCurrentTest()
+  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
+  if in_test_file
+    call SetTestFile()
+
+    if match(expand('%'), '\.feature$') != -1
+      call SetTestRunner("!zeus cucumber")
+      exec g:bjo_test_runner g:bjo_test_file
+    elseif match(expand('%'), '_spec\.rb$') != -1
+      call SetTestRunner("!zeus rspec")
+      exec g:bjo_test_runner g:bjo_test_file
+    else
+      call SetTestRunner("!ruby -Itest")
+      exec g:bjo_test_runner g:bjo_test_file
+    endif
+  else
+    exec g:bjo_test_runner g:bjo_test_file
+  endif
+endfunction
+
+function! SetTestRunner(runner)
+  let g:bjo_test_runner=a:runner
+endfunction
+
+function! RunCurrentLineInTest()
+  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
+  if in_test_file
+    call SetTestFileWithLine()
+  end
+
+  exec "!zeus rspec" g:bjo_test_file . ":" . g:bjo_test_file_line
+endfunction
+
+function! SetTestFile()
+  let g:bjo_test_file=@%
+endfunction
+
+function! SetTestFileWithLine()
+  let g:bjo_test_file=@%
+  let g:bjo_test_file_line=line(".")
+endfunction
+
+map <leader>rt :call RunCurrentTest()<CR>
+map <leader>rl :call RunCurrentLineInTest()<CR>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" End bjo stuff
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Rspec.vim mappings
+map <Leader>c :call RunCurrentSpecFile()<CR>
+map <Leader>n :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+
 function! RSpecLine()
   execute "!echo bundle exec rspec " . expand("%") . " -l " . line('.') " > test-commands"
 endfunction
