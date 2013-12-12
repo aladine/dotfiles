@@ -169,7 +169,6 @@ alias chrome="open /Applications/Google\ Chrome.app/"
 alias firefox="open /Applications/Firefox.app/"
 alias safari="open /Applications/Safari.app/"
 
-#alias purgequeue="for i in `mailq|grep '@' |awk {'print $1'}|grep -v '@'`; do postsuper -d $i ; done"
 alias spn="rake spec:no_rails"
 
 alias ctags="`brew --prefix`/bin/ctags"
@@ -180,7 +179,6 @@ alias tree="tree -C"
 alias spec="~/bin/spec.sh"
 alias bi='bundle install --path .bundle/gems --binstubs .bundle/bin'
 alias be='bundle exec'
-#git_prompt_info | perl -ne 's/\[chip\/([^_]+)_(.*)$/$1/; chomp $_; print "commit [$_]\n";'
 
 # Environment
 export GEM_PATH="$GEM_PATH:~/jruby/lib/ruby/gems/1.8/gems/"
@@ -197,11 +195,12 @@ export GITHUB_PASSWORD='Hedu0910'
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
 
 function encode() { echo -n $@ | perl -pe's/([^-_.~A-Za-z0-9])/sprintf("%%%02X", ord($1))/seg'; }
-#function google() { chrome http://www.google.com/search?hl=en#q="`encode $@`" ;}
 function commands() {
   awk '{a[$2]++}END{for(i in a){print a[i] " " i}}'
 }
-#history | commands | sort -rn | head
+
+function vgit() { vim `git status -s | cut -d ' ' -f 3` }
+
 alias topten="history | commands | sort -rn | head"
 
 # vim bindings for the command line
@@ -210,5 +209,3 @@ bindkey '^R' history-incremental-search-backward
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
-
-# cane --abc-glob '{lib/spec/app}/*/.rb' --abc-max 9
