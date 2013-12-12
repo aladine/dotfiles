@@ -45,9 +45,6 @@ set directory=~/.vim/_temp      " where to put swap files.
 
 let mapleader=","
 
-" clear the search buffer when hitting return
-:nnoremap <CR> :nohlsearch<cr>
-
 " easier navigation between split windows
 " nnoremap <c-j> <c-w>j
 " nnoremap <c-k> <c-w>k
@@ -91,8 +88,6 @@ nnoremap <leader>ev :e $MYVIMRC<cr>
 nnoremap <leader>sv :w\|:source $MYVIMRC<cr>
 nnoremap <leader>zsh :e ~/.zshrc<cr>
 nnoremap <leader>th :e ~/.oh-my-zsh/themes/chip.zsh-theme<cr>
-
-set grepprg=ack
 
 "set tags=./tags
 nnoremap <leader>gtag :!ctags -R --languages=ruby --exclude=.git -f ./.git/tags --tag-relative=yes<cr>
@@ -144,4 +139,26 @@ function! QuickfixFilenames()
   endfor
   return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
 endfunction
+
+nmap <Leader>b :CtrlPBuffer<CR>
+
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" bind \ (backward slash) to grep shortcut
+command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+
+nnoremap \ :Ag<SPACE>
 
