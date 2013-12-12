@@ -34,7 +34,7 @@ plugins=()
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=./bin:/usr/local/lib/node_modules/npm/bin:/usr/X11/bin:/Library/PostgreSQL/8.4/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/git/bin:/bin:/usr/bin:/sbin:/usr/sbin:~/bin:~/ruby/bin:/opt/local/bin:/opt/local/sbin
+export PATH=~/phantomjs-1.7.0-macosx/bin:./bin:/usr/X11/bin:/Library/PostgreSQL/8.4/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/git/bin:/bin:/usr/bin:/sbin:/usr/sbin:~/bin:~/ruby/bin:/opt/local/bin:/opt/local/sbin:/usr/local/go/bin
 
 # Mail
 alias mi="tail -f /var/log/mail.log"
@@ -191,16 +191,6 @@ export GIT_EDITOR=${EDITOR}
 export ARCHFLAGS="-arch x86_64"
 export EVENTNOKQUEUE=1
 export EVENT_NOKQUEUE=yes
-export PATH="/bin:/usr/bin:/sbin:/usr/sbin:~/bin:~/ruby/bin:/opt/local/bin:/opt/local/sbin"
-export PATH="/usr/local/git/bin:$PATH"
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH" 
-export PATH="/Library/PostgreSQL/8.4/bin:$PATH"
-export PATH="/usr/X11/bin:$PATH"
-#export DYLD_LIBRARY_PATH="/usr/local/mysql/lib:$DYLD_LIBRARY_PATH"
-#unset DYLD_LIBRARY_PATH
-export PATH="/usr/local/lib/node_modules/npm/bin:$PATH"
-export PATH="./bin:$PATH"
-export PATH="~/phantomjs-1.7.0-macosx/bin:$PATH"
 export CLICOLOR=1
 export GITHUB_USER='chip'
 export GITHUB_PASSWORD='Hedu0910'
