@@ -37,3 +37,10 @@
 
 [core]
 	editor = /usr/bin/vim -f
+
+[rerere]
+  enabled = true
+
+[push]
+  default = simple
+
