@@ -209,5 +209,8 @@ alias cores="sysctl -n hw.ncpu"
 bindkey -v
 bindkey '^R' history-incremental-search-backward
 
+fpath=($HOME/.zsh/func $fpath)
+typeset -U fpath
+
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
