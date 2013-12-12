@@ -133,7 +133,7 @@ map <leader>x :wq<CR>
 " Advanced: xterm-16color http://blog.remibergsma.com/2012/03/15/tweak-the-osx-terminal-to-display-colors/
 " Color scheme: http://ethanschoonover.com/solarized
 "set background=dark
-set background=light
+set background=dark
 colorscheme hemisu
 
 " Remapping escape
