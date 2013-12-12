@@ -203,6 +203,7 @@ function commands() {
 function vgit() { vim `git status -s | cut -d ' ' -f 3` }
 
 alias topten="history | commands | sort -rn | head"
+alias cores="sysctl -n hw.ncpu"
 
 # vim bindings for the command line
 bindkey -v
