@@ -183,6 +183,7 @@ alias be='bundle exec'
 # Environment
 export GEM_PATH="$GEM_PATH:~/jruby/lib/ruby/gems/1.8/gems/"
 export LD_LIBRARY_PATH="/usr/local/lib"
+export GOPATH="/Users/chip/code/go"
 export EDITOR="/usr/bin/vim -f"
 export SVN_EDITOR=${EDITOR}
 export GIT_EDITOR=${EDITOR}
