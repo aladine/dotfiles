@@ -10,12 +10,17 @@ set shell=/usr/local/bin/zsh
 setlocal spell spelllang=en_us 
 
 "" Whitespace
-set nowrap                      " don't wrap lines
+set wrap
+set linebreak
+" note trailing space at end of next line
+set showbreak=>\ \ \
 set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
 set expandtab                   " use spaces, not tabs (optional)
 "set list                        " Show invisible characters
 set backspace=indent,eol,start  " backspace through everything in insert mode
 autocmd FileType ruby,coffee,js,c,php autocmd BufWritePre <buffer> :%s/\s\+$//e
+set tw=72
+set fo+=1
 
 "" Searching
 set hlsearch                    " highlight matches
