@@ -146,6 +146,8 @@ nnoremap <leader>sv :w\|:source $MYVIMRC<cr>
 nnoremap <leader>zsh :e ~/.zshrc<cr>
 nnoremap <leader>th :e ~/.oh-my-zsh/themes/chip.zsh-theme<cr>
 
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+
 "set tags=./tags
 nnoremap <leader>gtag :!ctags -R --languages=ruby --exclude=.git -f ./.git/tags --tag-relative=yes<cr>
 let g:tagbar_ctags_bin='/usr/local/bin/ctags'  " Proper Ctags locations
