@@ -67,8 +67,11 @@ alias postgres_start="launchctl load -w ~/Library/LaunchAgents/postgres.plist"
 alias postgres_stop="launchctl unload -w ~/Library/LaunchAgents/postgres.plist"
 
 # Git
-alias g="git status"
-alias gst="echo 'Use g instead' && git status"
+alias g="git"
+alias ga="git add ."
+alias s="git status"
+alias gs="git status"
+alias gst="echo 'Use s or gs instead' && git status"
 alias pull="git pull origin"
 alias pullm='git pull --rebase origin master'
 alias pullr="git pull"
