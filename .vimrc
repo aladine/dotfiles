@@ -149,16 +149,10 @@ nnoremap <leader>th :e ~/.oh-my-zsh/themes/chip.zsh-theme<cr>
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 "set tags=./tags
-nnoremap <leader>gtag :!ctags -R --languages=ruby --exclude=.git -f ./.git/tags --tag-relative=yes<cr>
-let g:tagbar_ctags_bin='/usr/local/bin/ctags'  " Proper Ctags locations
-let g:tagbar_width=26                          " Default is 40, seems too wide
-noremap <silent> <Leader>yy :TagbarToggle       " Display panel with y (or ,y)
-
-" Ctrl-P mapping is overwritten
-let g:ctrlp_map = '<leader>f'
-let g:ctrlp_custom_ignore = 'tmp\|log\|public\|vendor/assets\|vendor/bundle\|vendor/plugins\|spec/cassett\|\.git\|cassett\|/.git\|/app/assets/image\|/coverage'
-let g:ctrlp_working_path_mode = 0
-nnoremap <leader>b :CtrlPBuffer<CR>
+"nnoremap <leader>gtag :!ctags -R --languages=ruby --exclude=.git -f ./.git/tags --tag-relative=yes<cr>
+"let g:tagbar_ctags_bin='/usr/local/bin/ctags'  " Proper Ctags locations
+"let g:tagbar_width=26                          " Default is 40, seems too wide
+"noremap <silent> <Leader>yy :TagbarToggle       " Display panel with y (or ,y)
 
 "map <leader>j :call JumpBetweenSpecAndCode()<cr>
 
@@ -189,17 +183,23 @@ endif
 " :Qargs
 " :argdo %s/CurrencyNumberHelper/CurrencyHelper/g
 " :argdo update
-command! -nargs=0 -bar Qargs execute 'args' QuickfixFilenames()
+"command! -nargs=0 -bar Qargs execute 'args' QuickfixFilenames()
 " populate the argument list with each of the files named in the quickfix list
-function! QuickfixFilenames()
-  let buffer_numbers = {}
-  for quickfix_item in getqflist()
-    let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
-  endfor
-  return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
-endfunction
+"function! QuickfixFilenames()
+"  let buffer_numbers = {}
+"  for quickfix_item in getqflist()
+"    let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
+"  endfor
+"  return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
+"endfunction
 
-nmap <Leader>b :CtrlPBuffer<CR>
+" Ctrl-P mapping is overwritten
+let g:ctrlp_map = '<leader>f'
+let g:ctrlp_custom_ignore = 'tmp\|log\|public\|vendor/assets\|vendor/bundle\|vendor/plugins\|spec/cassett\|\.git\|cassett\|/.git\|/app/assets/image\|/coverage'
+let g:ctrlp_working_path_mode = 0
+nnoremap <leader>b :CtrlPBuffer<CR>
+
+"nmap <Leader>b :CtrlPBuffer<CR>
 
 " The Silver Searcher
 if executable('ag')
