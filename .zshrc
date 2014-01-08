@@ -98,6 +98,8 @@ alias ptags='git push --tags'
 alias tags='git tag -n'
 alias gb="git branch"
 alias stash="git stash"
+alias gtag="git tag -a `date -u \"+UTC_%Y%m%d%H%M%S\"`"
+alias gap="git add -p"
 alias a="ag"
 alias v="vim"
 
@@ -175,7 +177,6 @@ alias safari="open /Applications/Safari.app/"
 alias spn="rake spec:no_rails"
 
 alias ctags="`brew --prefix`/bin/ctags"
-alias gtag="git tag -a `date -u \"+UTC_%Y%m%d%H%M%S\"`"
 
 alias tree="tree -C"
 
