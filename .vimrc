@@ -46,7 +46,6 @@ set clipboard=unnamed
 
 let mapleader=","
 
-
 autocmd FileType make setlocal noexpandtab
 map <leader>gg :topleft 100 :split Gemfile<cr>
 
@@ -126,8 +125,6 @@ nnoremap <leader>th :e ~/.oh-my-zsh/themes/chip.zsh-theme<cr>
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
-"set tags=./tags
-"nnoremap <leader>gtag :!ctags -R --languages=ruby --exclude=.git -f ./.git/tags --tag-relative=yes<cr>
 "let g:tagbar_ctags_bin='/usr/local/bin/ctags'  " Proper Ctags locations
 "let g:tagbar_width=26                          " Default is 40, seems too wide
 "noremap <silent> <Leader>yy :TagbarToggle       " Display panel with y (or ,y)
