@@ -46,6 +46,8 @@ set clipboard=unnamed
 
 let mapleader=","
 
+
+autocmd FileType make setlocal noexpandtab
 map <leader>gg :topleft 100 :split Gemfile<cr>
 
 nnoremap <leader><leader> <c-^>
