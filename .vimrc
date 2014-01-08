@@ -102,22 +102,6 @@ map <leader>s :call RunCurrentLineInTest()<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " End bjo stuff
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Rspec.vim mappings
-map <Leader>c :call RunCurrentSpecFile()<CR>
-map <Leader>n :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
-
-function! RSpecLine()
-  execute "!echo bundle exec rspec " . expand("%") . " -l " . line('.') " > test-commands"
-endfunction
-function! RSpecFile()
-  execute "!echo bundle exec rspec " . expand("%") . " > test-commands"
-endfunction
-map <leader>s :w\|:call RSpecLine() <CR>\|:redraw!<CR>
-map <leader>S :w\|:call RSpecFile() <CR>\|:redraw!<CR>
-
 map <leader>w :w<CR>
 map <leader>q :q<CR>
 map <leader>x :wq<CR>
