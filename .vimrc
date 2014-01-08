@@ -125,21 +125,21 @@ nnoremap <leader>th :e ~/.oh-my-zsh/themes/chip.zsh-theme<cr>
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
-"map <leader>j :call JumpBetweenSpecAndCode()<cr>
+map <leader>j :call JumpBetweenSpecAndCode()<cr>
 
-"function! JumpBetweenSpecAndCode()
-"  let filename = expand("%:t")
-"  if filename =~ '_spec\.'
-"  let filename = substitute(filename, '_spec', '', '')
-"  let foundfile = findfile(filename, ";,**")
-"  exec "edit " . foundfile
-"  else
-"  let filename = substitute(filename, '\.', '_spec\.', '')
-"  let foundfile = findfile(filename, ";,**")
-"  exec "edit " . foundfile
-"  endif
-"endfunction
-"
+function! JumpBetweenSpecAndCode()
+  let filename = expand("%:t")
+  if filename =~ '_spec\.'
+  let filename = substitute(filename, '_spec', '', '')
+  let foundfile = findfile(filename, ";,**")
+  exec "edit " . foundfile
+  else
+  let filename = substitute(filename, '\.', '_spec\.', '')
+  let foundfile = findfile(filename, ";,**")
+  exec "edit " . foundfile
+  endif
+endfunction
+
 " From Alex for opening spec file for current file
 " map <leader>A :on<CR>\|:vsplit<CR>\|<c-w>l\|:A<CR>
 if exists(":Tabularize")
