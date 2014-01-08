@@ -42,6 +42,7 @@ set autoread
 
 set backupdir=~/.vim/_backup    " where to put backup files.
 set directory=~/.vim/_temp      " where to put swap files.
+set clipboard=unnamed
 
 let mapleader=","
 
