@@ -46,15 +46,6 @@ set clipboard=unnamed
 
 let mapleader=","
 
-" easier navigation between split windows
-" nnoremap <c-j> <c-w>j
-" nnoremap <c-k> <c-w>k
-" nnoremap <c-h> <c-w>h
-" nnoremap <c-l> <c-w>l
-" 
-" double percentage sign in command mode is expanded
-" to directory of current file - http://vimcasts.org/e/14
-" cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>gg :topleft 100 :split Gemfile<cr>
 
 nnoremap <leader><leader> <c-^>
