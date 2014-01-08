@@ -140,8 +140,6 @@ function! JumpBetweenSpecAndCode()
   endif
 endfunction
 
-" From Alex for opening spec file for current file
-" map <leader>A :on<CR>\|:vsplit<CR>\|<c-w>l\|:A<CR>
 if exists(":Tabularize")
   nmap <Leader>a= :Tabularize /=<CR>
   vmap <Leader>a= :Tabularize /=<CR>
