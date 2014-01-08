@@ -163,8 +163,6 @@ let g:ctrlp_custom_ignore = 'tmp\|log\|public\|vendor/assets\|vendor/bundle\|ven
 let g:ctrlp_working_path_mode = 0
 nnoremap <leader>b :CtrlPBuffer<CR>
 
-"nmap <Leader>b :CtrlPBuffer<CR>
-
 " The Silver Searcher
 if executable('ag')
   " Use ag over grep
@@ -184,4 +182,3 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
 nnoremap \ :Ag<SPACE>
-
