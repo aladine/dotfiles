@@ -97,8 +97,8 @@ function! SetTestFileWithLine()
   let g:bjo_test_file_line=line(".")
 endfunction
 
-map <leader>rt :call RunCurrentTest()<CR>
-map <leader>rl :call RunCurrentLineInTest()<CR>
+map <leader>S :call RunCurrentTest()<CR>
+map <leader>s :call RunCurrentLineInTest()<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " End bjo stuff
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
